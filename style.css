@@ -35,12 +35,12 @@ body {
 
   background: var(--bg-url) no-repeat top center/cover;
   height: 100vh;
+  overflow: hidden;
 }
 
 body * {
   font-family: "Inter", sans-serif;
   color: var(--text-color);
-  overflow: hidden;
 }
 
 #container {
