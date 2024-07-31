@@ -6,6 +6,7 @@
 
 :root {
   --text-color: white;
+  --link-color: var(--text-color); /* Cor dos links igual à cor do texto */
   --bg-url: url(./assets/bg-mobile.jpg);
   --stroke-color: rgba(255, 255, 255, 0.5);
   --surface-color: rgba(255, 255, 255, 0.05);
@@ -16,6 +17,7 @@
 
 .light {
   --text-color: black;
+  --link-color: var(--text-color); /* Cor dos links na versão clara */
   --bg-url: url(./assets/bg-mobile-light.jpg);
   --stroke-color: rgba(0, 0, 0, 0.5);
   --surface-color: rgba(0, 0, 0, 0.05);
@@ -24,30 +26,25 @@
   --switch-bg-url: url(./assets/sun.svg);
 }
 
+html,
 body {
-  /* background-image: url(./assets/bg-mobile.jpg);
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: cover;
-  */
-
-  /* background: color image repeat position/size */
-
-  background: var(--bg-url) no-repeat top center/cover;
-  height: 100vh;
-  overflow: hidden;
+  height: 100%;
 }
 
-body * {
+body {
+  background: var(--bg-url) no-repeat top center/cover;
   font-family: "Inter", sans-serif;
   color: var(--text-color);
+  display: flex;
+  flex-direction: column;
 }
 
 #container {
-  width: 360px;
+  width: 90%;
   max-width: 588px;
-  margin: 56px auto 0px;
+  margin: 56px auto 0;
   padding: 0 24px;
+  flex: 1; /* Allows the container to expand and push the footer down */
 }
 
 /* profile */
@@ -58,7 +55,8 @@ body * {
 }
 
 #profile img {
-  width: 112px;
+  width: 25vw; /* Responsive width */
+  max-width: 112px;
 }
 
 #profile p {
@@ -71,7 +69,6 @@ body * {
 #switch {
   position: relative;
   width: 64px;
-
   margin: 4px auto;
 }
 
@@ -81,13 +78,11 @@ body * {
   background: white var(--switch-bg-url) no-repeat center;
   border: 0;
   border-radius: 50%;
-
   position: absolute;
   top: 50%;
   left: 0;
   z-index: 1;
   transform: translateY(-50%);
-
   animation: slide-back 0.2s;
 }
 
@@ -113,11 +108,9 @@ body * {
 /* links */
 ul {
   list-style: none;
-
   display: flex;
   flex-direction: column;
   gap: 16px;
-
   padding: 24px 0;
 }
 
@@ -125,23 +118,19 @@ ul li a {
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 16px 24px;
-
   background: var(--surface-color);
   border: 1px solid var(--stroke-color);
   border-radius: 8px;
-
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-
   text-decoration: none;
   font-weight: 500;
-
+  color: var(--text-color); /* Definindo a cor dos links */
   transition: background 0.2s;
 }
 
-/* pesudo-selector */
+/* pseudo-selector */
 ul li a:hover {
   background: var(--surface-color-hover);
   border: 1.5px solid var(--text-color);
@@ -151,9 +140,7 @@ ul li a:hover {
 #social-links {
   display: flex;
   justify-content: center;
-
   padding: 24px 0;
-
   font-size: 24px;
 }
 
@@ -162,9 +149,9 @@ ul li a:hover {
   align-items: center;
   justify-content: center;
   padding: 16px;
-
   transition: background 0.2s;
   border-radius: 50%;
+  color: var(--text-color); /* Definindo a cor dos links sociais */
 }
 
 #social-links a:hover {
@@ -175,11 +162,31 @@ footer {
   padding: 24px 0;
   text-align: center;
   font-size: 14px;
+  color: var(--text-color); /* Definindo a cor do texto do footer */
+}
+
+/* Links no footer */
+footer a {
+  color: var(
+    --text-color
+  ); /* Garantindo que a cor dos links no footer seja a mesma definida */
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline; /* Adicionando um sublinhado opcional para links no hover */
 }
 
 /* media queries */
+@media (min-width: 576px) {
+  /* For small tablets and up */
+  #container {
+    width: 80%;
+  }
+}
 
-@media (min-width) {
+@media (min-width: 768px) {
+  /* For tablets and up */
   :root {
     --bg-url: url(./assets/bg-desktop.jpg);
   }
@@ -187,10 +194,20 @@ footer {
   .light {
     --bg-url: url(./assets/bg-desktop-light.jpg);
   }
+
+  #container {
+    width: 70%;
+  }
+}
+
+@media (min-width: 992px) {
+  /* For large tablets and desktops */
+  #container {
+    width: 60%;
+  }
 }
 
 /* animation */
-
 @keyframes slide-in {
   from {
     left: 0;
